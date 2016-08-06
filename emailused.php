@@ -14,9 +14,9 @@ try{
 	$sql = "SELECT email, FROM user WHERE email = '$email';";
 	$result = $conn->query($sql);
 	if(count($result) == 0){
-		echo {"newemail": true};
+		echo '{"newemail": true}';
 	}else{
-		echo {"newemail": false}
+		echo '{"newemail": false}';
 	}
 }catch(PDOException $e) {
     echo $e->getMessage();

@@ -11,7 +11,7 @@ try{
 
     	$email = $_POST['email'];
 
-	$sql = "SELECT email, FROM user WHERE email = '$email';";
+	$sql = "SELECT email FROM user WHERE email = '$email';";
 	$result = $conn->query($sql);
 	if(count($result) == 0){
 		echo '{"newemail": true}';

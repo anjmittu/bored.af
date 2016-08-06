@@ -1,9 +1,9 @@
 <?php
 
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "myDB";
+$servername = "";
+$username = "";
+$password = "";
+$dbname = "";
 
 try{
 	$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -11,11 +11,12 @@ try{
 
     $email = $_POST['email'];
 
-	$sql = "SELECT email, pass_hash FROM user WHERE email = $email;";
+	$sql = "SELECT email, pass_hash FROM user WHERE email = '$email';";
 	$result = $conn->query($sql);
-	if(!count($result) == 1){
-		if($result[1]["email"] ==  $_POST["email"]){
-			if(password_verify($_POST["password"], $result[1]["pass_hash"])){
+	if(count($result) == 1){
+		$result=$result->fetchAll();
+		if($result[0]["email"] ==  $_POST["email"]){
+			if(password_verify($_POST["password"], $result[0]["pass_hash"])){
 				echo '{"verified": true}';
 			}else{
 				fail();
@@ -27,6 +28,7 @@ try{
 		fail();
 	}
 }catch(PDOException $e) {
+    echo $e->getMessage();
     fail();
 }
 

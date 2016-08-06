@@ -1,28 +1,27 @@
 <?php
 
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "myDB";
+$servername = "";
+$username = "";
+$password = "";
+$dbname = "";
 
 try{
 	$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	$fname = $conn->quote($_POST["fname"]);
-	$lname = $conn->quote($_POST["lname"]);
-	$email = $conn->quote($_POST["email"]);
-	$pass = $conn->quote(password_hash($_POST["pass"], PASSWORD_DEFAULT ));
-	$bday = $conn->quote($_POST["bday"]);
-	$gender = $conn->quote($_POST["gender"]);
-
-	$sql = "INSERT INTO user VALUE('$fname', '$lname', '$pass', '$email', '$bday', '$gender');";
+	$fname = $_POST["fname"];
+	$lname = $_POST["lname"];
+	$email =$_POST["email"];
+	$pass = password_hash($_POST["pass"], PASSWORD_BCRYPT );
+	$bday = $_POST["bday"];
+	$gender = $_POST["gender"];
+	$sql = "INSERT INTO user(first_name, last_name, pass_hash, email, birthdate, gender) VALUE('$fname', '$lname', '$pass', '$email', '$bday', '$gender');";
 
 	$conn->exec($sql);
 	echo '{"completed": true}';
 	
 }catch(PDOException $e) {
-    fail();
+    echo $e->getMessage();
 }
 
 function fail(){

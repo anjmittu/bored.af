@@ -13,7 +13,8 @@ try{
 
 	$sql = "SELECT email FROM user WHERE email = '$email';";
 	$result = $conn->query($sql);
-	if(count($result) == 0){
+	
+	if($result->row_count() == 0){
 		echo '{"newemail": true}';
 	}else{
 		echo '{"newemail": false}';

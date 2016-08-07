@@ -4,7 +4,7 @@ $servername = "";
 $username = "";
 $password = "";
 $dbname = "";
-$return = ();
+$return = array();
 
 try{
 	$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -28,9 +28,13 @@ try{
 		   	   $interest = $row['name'];
 			   $sql = "SELECT user_id FROM interest WHERE name = '$interest';";
 			   $result2 = $conn->query($sql);
-			   $result2=$result2->fetchAll();
-			   foreach ($result2 as $row2) {
-			   	   array_merge($return,array($row2['user_id']);
+			   if ($result2->rowCount() >= 1){
+			      	   $result2=$result2->fetchAll();
+				   foreach ($result2 as $row2) {
+			   	   	     array_merge($return, array($row2['user_id']));
+			   	   }
+			   } else {
+			     fail();
 			   }
 		   }
 
@@ -54,7 +58,7 @@ try{
 }
 
 function fail(){
-	echo '{"interests": []}';
+	echo '{"users": []}';
 }
 
 ?>

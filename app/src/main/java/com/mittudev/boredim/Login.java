@@ -102,7 +102,11 @@ public class Login extends AppCompatActivity {
                     if (jResponse.getBoolean("verified")) {
                         EditText usrName = (EditText) findViewById(R.id.usrNm);
                         Intent intent = new Intent(Login.this, MainPage.class);
-                        intent.putExtra(usrName.getText().toString(), true);
+
+                        Bundle b = new Bundle();
+                        b.putString("email", usrName.getText().toString());
+                        intent.putExtras(b);
+
                         startActivity(intent);
                         finish();
                     } else {

@@ -15,7 +15,10 @@ public class MainPage extends AppCompatActivity {
     }
 
     public void imBored(View view) {
-        Intent intent = new Intent(MainPage.this, FindPeople.class);
+        Bundle b = this.getIntent().getBundleExtra("email");
+
+        Intent intent = new Intent(MainPage.this, Groups.class);
+        intent.putExtras(b);
         startActivity(intent);
         finish();
     }

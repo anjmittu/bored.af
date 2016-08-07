@@ -14,7 +14,7 @@ public class FindPeople extends AppCompatActivity {
     }
 
     public void findPpl() {
-        TextView p1n = (TextView) findViewById(R.id.p1n);
+        /*TextView p1n = (TextView) findViewById(R.id.p1n);
         TextView p1i = (TextView) findViewById(R.id.p1i);
         TextView p1i2 = (TextView) findViewById(R.id.p1i2);
         TextView p2n = (TextView) findViewById(R.id.p2n);
@@ -22,7 +22,7 @@ public class FindPeople extends AppCompatActivity {
         TextView p2i2 = (TextView) findViewById(R.id.p2i2);
         TextView p3n = (TextView) findViewById(R.id.p3n);
         TextView p3i = (TextView) findViewById(R.id.p3i);
-        TextView p3i2 = (TextView) findViewById(R.id.p3i2);
+        TextView p3i2 = (TextView) findViewById(R.id.p3i2); */
 
 
 

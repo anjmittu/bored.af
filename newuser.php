@@ -9,12 +9,12 @@ try{
 	$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	$fname = mysql_real_escape_string($_POST["fname"]);
-	$lname = mysql_real_escape_string($_POST["lname"]);
-	$email = mysql_real_escape_string($_POST["email"]);
-	$pass = mysql_real_escape_string(password_hash($_POST["pass"]));
-	$bday = mysql_real_escape_string($_POST["bday"]);
-	$gender = mysql_real_escape_string($_POST["gender"]);
+	$fname = $conn->quote($_POST["fname"]);
+	$lname = $conn->quote($_POST["lname"]);
+	$email = $conn->quote($_POST["email"]);
+	$pass = $conn->quote(password_hash($_POST["pass"], PASSWORD_DEFAULT ));
+	$bday = $conn->quote($_POST["bday"]);
+	$gender = $conn->quote($_POST["gender"]);
 
 	$sql = "INSERT INTO user VALUE('$fname', '$lname', '$pass', '$email', '$bday', '$gender');";
 

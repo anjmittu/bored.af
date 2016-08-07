@@ -19,15 +19,21 @@ try{
 		$user_id = $result[0]["user_id"];
 		
 		$sql = "SELECT name FROM interest WHERE user_id = '$user_id';";
+		$result = $conn->query($sql);
 
-		$return = '{"interests": [';
-		foreach ($conn->query($sql) as $row) {
-			$return=$return.'"'.$row['name'].'"'.', ';
+		if ($result->rowCount() >= 1){
+
+		   $return = '{"interests": [';
+		   foreach ($result as $row) {
+		   	$return=$return.'"'.$row['name'].'"'.', ';
+		   }
+		   $return=substr($return, 0, (strlen($return)-2));
+		   $return=$return.']}';
+
+		   echo $return;
+		} else {
+		  fail();
 		}
-		$return=substr($return, 0, (strlen($return)-2));
-		$return=$return.']}';
-
-		echo $return;
 	}else{
 		fail();
 	}

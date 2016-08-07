@@ -4,6 +4,7 @@ $servername = "";
 $username = "";
 $password = "";
 $dbname = "";
+$return = ();
 
 try{
 	$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -17,22 +18,31 @@ try{
 	if($result->rowCount() == 1){
 		$result=$result->fetchAll();
 		$user_id = $result[0]["user_id"];
-		
+
 		$sql = "SELECT name FROM interest WHERE user_id = '$user_id';";
 		$result = $conn->query($sql);
 
 		if ($result->rowCount() >= 1){
 
-		   $return = '{"interests": [';
 		   foreach ($result as $row) {
-		   	echo $row['name']
-		   	$return=$return.'"'.$row['name'].'"'.', ';
+		   	   $interest = $row['name'];
+			   $sql = "SELECT user_id FROM interest WHERE name = '$interest';";
+			   $result2 = $conn->query($sql);
+			   $result2=$result2->fetchAll();
+			   foreach ($result2 as $row2) {
+			   	   array_merge($return,array($row2['user_id']);
+			   }
 		   }
-		   $return=substr($return, 0, (strlen($return)-2));
-		   $return=$return.']}';
 
-		   echo $return;
-		} else {
+		   $returnjs = '{"users": [';
+		   foreach ($return as $user) {
+		   	$returnjs=$returnjs.'"'.$user.'"'.', ';
+		   }
+		   $returnjs=substr($returnjs, 0, (strlen($returnjs)-2));
+		   $returnjs=$returnjs.']}';
+
+		   echo $returnjs;
+		 } else {
 		  fail();
 		}
 	}else{

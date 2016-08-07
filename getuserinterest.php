@@ -22,12 +22,12 @@ try{
 
 		$return = '{"interests": [';
 		foreach ($conn->query($sql) as $row) {
-			$return=$return.$row['name'].', ';
+			$return=$return.'"'.$row['name'].'"'.', ';
 		}
 		$return=substr($return, 0, (strlen($return)-2));
 		$return=$return.']}';
 
-		$return;
+		echo $return;
 	}else{
 		fail();
 	}
@@ -37,7 +37,7 @@ try{
 }
 
 function fail(){
-	echo '{"verified": false}';
+	echo '{"interests": []}';
 }
 
 ?>

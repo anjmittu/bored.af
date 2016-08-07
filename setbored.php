@@ -18,9 +18,16 @@ try{
 	if($result->rowCount() == 1){
 		$result=$result->fetchAll();
 		$user_id = $result[0]["user_id"];
-
-		$sql = "INSERT INTO bored VALUE('$user_id', '$bored');";
-		$result = $conn->query($sql);
+		
+		$sql = "SELECT user_id FROM bored WHERE user_id=$user_id;";
+		
+		if($conn->query($sql)->rowCount() == 0){
+			$sql = "INSERT INTO bored VALUE('$user_id', '$bored');";
+			$result = $conn->query($sql);
+		}else{
+			$sql = "UPDATE bored SET bored=$bored WHERE user_id=$user_id;";
+			$result = $conn->query($sql);
+		}
 		
 		echo '{"verified": true}';	
 	}else{

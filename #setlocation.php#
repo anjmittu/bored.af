@@ -1,4 +1,4 @@
-<?php
+v<?php
 
 $servername = "";
 $username = "";
@@ -19,16 +19,9 @@ try{
 	if($result->rowCount() == 1){
 		$result=$result->fetchAll();
 		$user_id = $result[0]["user_id"];
-	
-		$sql = "SELECT user_id FROM location WHERE user_id = $user_id;";
-		
-		if($conn->query($sql)->rowCount() == 0){
-			$sql = "INSERT INTO Location VALUE('$long', '$lat', '$user_id');";
-			$result = $conn->query($sql);
-		}else{
-			$sql = "UPDATE location SET lat=$lat, lon=$long WHERE user_id = $user_id;";
-			$result = $conn->query($sql);
-		}
+
+		$sql = "INSERT INTO Location VALUE('$long', '$lat', '$user_id');";
+		$result = $conn->query($sql);
 		
 		echo '{"verified": true}';	
 	}else{

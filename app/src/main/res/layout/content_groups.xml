@@ -12,4 +12,6 @@
     tools:context="com.mittudev.boredim.Groups"
     tools:showIn="@layout/activity_groups">
 
+
+
 </RelativeLayout>

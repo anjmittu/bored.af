@@ -101,12 +101,8 @@ public class Login extends AppCompatActivity {
                     JSONObject jResponse = new JSONObject(response);
                     if (jResponse.getBoolean("verified")) {
                         EditText usrName = (EditText) findViewById(R.id.usrNm);
+                        GlobalVars.email = usrName.getText().toString();
                         Intent intent = new Intent(Login.this, MainPage.class);
-
-                        Bundle b = new Bundle();
-                        b.putString("email", usrName.getText().toString());
-                        intent.putExtras(b);
-
                         startActivity(intent);
                         finish();
                     } else {
